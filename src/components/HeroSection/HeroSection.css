@@ -1,0 +1,11 @@
+.hero-slider .slick-dots {
+    bottom: 40px !important;
+}
+.hero-slider .slick-dots li button:before {
+    color: white !important;
+    font-size: 12px !important;
+}
+
+.hero-slider .slick-dots li.slick-active button:before {
+    color: rgb(112, 236, 112) !important;
+}
