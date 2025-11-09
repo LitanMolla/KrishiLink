@@ -16,7 +16,7 @@ const HeroSection = () => {
     };
     return (
         <>
-            <section className='mb-10 hero-slider'>
+            <section className='mb-10 hero-slider w-full overflow-hidden'>
                 <Slider {...settings}>
                     <div className="relative">
                         <img className="w-full" src={vegetables} alt="vegetables" />
