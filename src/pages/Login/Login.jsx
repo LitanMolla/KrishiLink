@@ -3,9 +3,9 @@ import useAuth from '../../hooks/useAuth'
 import ErrorToast from '../../utils/ErrorToast'
 import SuccessToast from '../../utils/SuccessToast'
 import { Link, useLocation, useNavigate } from 'react-router'
-
+import google from '/google.png'
 const Login = () => {
-  const { loginUser, user } = useAuth()
+  const { loginUser, user, googleLogin } = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
   useEffect(() => {
@@ -26,12 +26,23 @@ const Login = () => {
         ErrorToast(error)
       })
   }
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then((result) => {
+        SuccessToast('Login Successful')
+        navigate('/')
+      })
+      .catch(error => {
+        ErrorToast(error)
+      })
+  }
   return (
     <div>
       <div className="my-10">
         <div className="container">
-          <div className="w-full container max-w-xl mx-auto bg-white p-5 lg:p-10 rounded-lg shadow duration-300 hover:shadow-xl space-y-3">
+          <div className="w-full container max-w-xl mx-auto bg-white p-10 rounded-lg shadow duration-300 hover:shadow-xl space-y-3">
             <form onSubmit={handleLogin} className='space-y-3'>
+              <h2 className='text-4xl font-semibold text-center text-green-500'>Login User</h2>
               <div className="">
                 <label>Email</label>
                 <input required name='email' className='block border w-full px-5 py-2.5 rounded-md border-gray-300' type="email" placeholder='Enter your email' />
@@ -42,9 +53,9 @@ const Login = () => {
               </div>
               <input className='block text-center bg-linear-to-r hover:brightness-105 duration-300 from-green-400 to-green-600 rounded-md text-white w-full py-2.5 cursor-pointer' type="submit" value="Login" />
             </form>
-            <p>Don't have an account <Link to='/register' className='text-green-500 duration-300 hover:text-green-600'>Register</Link></p>
+            <button onClick={handleGoogleLogin} className='flex items-center text-green-600 justify-center gap-2 border w-full py-2.5 rounded-md cursor-pointer bg-gray-100 duration-300 hover:bg-green-100'><img className='w-5' src={google} alt="google" /><span>Login with Google</span></button>
+            <p>Don't have an account? <Link to='/register' className='text-green-500 duration-300 hover:text-green-600'>Register</Link></p>
           </div>
-
         </div>
       </div>
     </div>

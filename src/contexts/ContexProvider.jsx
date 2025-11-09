@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import AuthContext from './AuthContext'
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth'
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth'
 import { auth } from '../firebase/firebase.config'
-
+import { GoogleAuthProvider } from "firebase/auth";
+const googleProvider = new GoogleAuthProvider();
 const ContexProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
@@ -22,6 +23,10 @@ const ContexProvider = ({ children }) => {
     const logoutUser = () => {
         return signOut(auth)
     }
+    // user login with google
+    const googleLogin = () => {
+        return signInWithPopup(auth,googleProvider)
+    }
     // user observer
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -39,7 +44,8 @@ const ContexProvider = ({ children }) => {
         loading,
         setLoading,
         loginUser,
-        logoutUser
+        logoutUser,
+        googleLogin
     }
     return (
         <AuthContext.Provider value={authInfo}>
