@@ -39,7 +39,7 @@ const router = createBrowserRouter([
                 Component: AllCrops
             },
             {
-                path: 'corp-details',
+                path: 'corp-details/:id',
                 element: <ProtectedRoute><CropDetails/></ProtectedRoute>
             },
             {

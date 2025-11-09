@@ -1,16 +1,17 @@
+import { useEffect } from 'react'
 import useAuth from '../hooks/useAuth'
-import { useNavigate } from 'react-router'
+import { Navigate } from 'react-router'
 
-const ProtectedRoute = ({children}) => {
-  const {user,loading} = useAuth()
-  const navigate = useNavigate()
-  if (!user) {
-    return navigate('/login')
-  }
+const ProtectedRoute = ({ children }) => {
+  const { user, loading } = useAuth()
   if (loading) {
     return <p>Loading...</p>
   }
-  return children;
+  if (user) {
+    return children;
+  } else {
+    return <Navigate to='/login' />
+  }
 }
 
 export default ProtectedRoute;
