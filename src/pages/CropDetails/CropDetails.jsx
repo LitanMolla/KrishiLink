@@ -19,7 +19,8 @@ const CropDetails = () => {
   const { _id, name, type, pricePerUnit, unit, quantity, description, location, image, createdAt, interests, owner } = crop;
   const ownerEmail = owner?.ownerEmail;
   const userEmail = user?.email;
-  const matchEmail = userEmail === ownerEmail
+  const matchEmail = userEmail === ownerEmail;
+  const isSubmitted = interests?.some(item => item.userEmail === userEmail)
   const interestInfo = {
     cropId: id,
     userEmail,
@@ -50,6 +51,7 @@ const CropDetails = () => {
           .then(data => {
             if (data.data.modifiedCount === 1) {
               SuccessToast('Interest Submitted Successfully')
+              setCrop({ ...crop, interests: [interestFrom] })
             }
             event.target.reset()
           })
@@ -58,8 +60,6 @@ const CropDetails = () => {
           })
       }
     });
-
-
   }
   return (
     <>
@@ -112,23 +112,16 @@ const CropDetails = () => {
           {/* Interested Submit part */}
           {!matchEmail && (
             <form onSubmit={handleInterestSubmit} className="mt-8 p-6 rounded-2xl bg-white ring-1 ring-gray-200 shadow-sm space-y-4 max-w-lg mx-auto duration-300 hover:shadow-xl">
-
               <h3 className="text-xl font-semibold text-primary text-center">Send Interest</h3>
-
-              {/* Quantity */}
               <div className="space-y-1">
                 <label className="text-sm text-gray-600 capitalize">Quantity ({unit})</label>
                 <input name='quantity' onChange={interestFromOnchange} type="number" min='1' placeholder="Enter quantity" className="w-full border border-gray-300 focus:border-primary rounded-xl px-3 py-2 outline-none" />
               </div>
-
-              {/* Message */}
               <div className="space-y-1">
                 <label className="text-sm text-gray-600">Message</label>
                 <textarea name='message' onChange={interestFromOnchange} placeholder="Write something..." rows="3" className="w-full border border-gray-300 focus:border-primary rounded-xl px-3 py-2 outline-none resize-none"
                 ></textarea>
               </div>
-
-              {/* Total Price (static display) */}
               <div className="text-center font-semibold text-gray-800 text-sm">
                 {
                   interestFrom?.quantity
@@ -144,31 +137,24 @@ const CropDetails = () => {
                   <span className='text-green-600'>৳{pricePerUnit * interestFrom?.quantity}</span>
                 }</p>
               </div>
-
-              {/* Submit Button */}
-              <button
-                className="link rounded-md w-full cursor-pointer"
-              >
+              <button disabled={isSubmitted} className="bg-green-500 block py-2 text-white duration-300 hover:bg-green-600 border border-green-500 rounded-md w-full cursor-pointer disabled:cursor-not-allowed disabled:bg-gray-500 disabled:border-0">
                 Submit Interest
               </button>
-
+              {isSubmitted && <p className='text-center text-yellow-500'>You've already sent an interest</p>}
             </form>
           )}
           {/* Interested Submit part end */}
           {/* Received Interests (Owner Only, Static UI) */}
-          {!matchEmail && (
+          {matchEmail && (
             <div className="mt-8 max-w-5xl mx-auto">
-              <h3 className="text-xl font-semibold text-primary mb-3">
-                Received Interests
-              </h3>
-
+              <h3 className="text-xl font-semibold text-primary mb-3">Received Interests</h3>
               {/* Empty state */}
               {(!Array.isArray(crop?.interests) || crop.interests.length === 0) ? (
-                <div className="rounded-2xl bg-white ring-1 ring-gray-200 p-6 text-gray-600">
+                <div className="rounded-lg bg-white ring-1 ring-gray-200 p-6 text-gray-600">
                   No interests yet.
                 </div>
               ) : (
-                <div className="rounded-2xl overflow-x-auto bg-white ring-1 ring-gray-200">
+                <div className="rounded-lg overflow-x-auto bg-white ring-1 ring-gray-200">
                   <table className="min-w-full text-sm">
                     <thead className="bg-gray-50 text-gray-600">
                       <tr className="text-left">
@@ -179,17 +165,16 @@ const CropDetails = () => {
                         <th className="py-3 px-4">Actions</th>
                       </tr>
                     </thead>
-
                     <tbody>
-                      {crop.interests.map((i) => {
+                      {crop.interests.map((i, index) => {
                         const pill =
                           i.status === "accepted"
-                            ? "bg-green-100 text-green-700"
+                            ? "bg-green-100 text-green-700 capitalize"
                             : i.status === "rejected"
                               ? "bg-red-100 text-red-700"
-                              : "bg-yellow-100 text-yellow-700"; // pending
+                              : "bg-yellow-100 text-yellow-700 capitalize";
                         return (
-                          <tr key={i._id} className="border-t">
+                          <tr key={index} className="border-t border-t-gray-300">
                             <td className="py-3 px-4">{i.userName}</td>
                             <td className="py-3 px-4">{i.quantity} {crop?.unit}</td>
                             <td className="py-3 px-4">{i.message || "-"}</td>
@@ -199,16 +184,15 @@ const CropDetails = () => {
                               </span>
                             </td>
                             <td className="py-3 px-4 space-x-2">
-                              {/* Static buttons (no handlers) */}
                               <button
-                                className="px-3 py-1 rounded-lg bg-green-500 text-white disabled:opacity-50"
+                                className="px-3 py-1 rounded-lg bg-green-500 text-white disabled:opacity-50 cursor-pointer"
                                 disabled={i.status !== "pending"}
                                 title="Accept"
                               >
                                 Accept
                               </button>
                               <button
-                                className="px-3 py-1 rounded-lg bg-red-500 text-white disabled:opacity-50"
+                                className="px-3 py-1 rounded-lg bg-red-500 text-white disabled:opacity-50 cursor-pointer"
                                 disabled={i.status !== "pending"}
                                 title="Reject"
                               >
@@ -224,7 +208,6 @@ const CropDetails = () => {
               )}
             </div>
           )}
-
         </div>
       </section>
     </>

@@ -54,7 +54,7 @@ const Login = () => {
     <div>
       <div className="my-10">
         <div className="container">
-          <div className="w-full container max-w-xl mx-auto bg-white p-10 rounded-lg shadow duration-300 hover:shadow-xl space-y-3">
+          <div className="w-full container max-w-xl mx-auto bg-white p-10 rounded-lg shadow duration-300 hover:shadow-xl space-y-3 ">
             <form onSubmit={handleLogin} className='space-y-3'>
               <h2 className='text-4xl font-semibold text-center text-green-500'>Login User</h2>
               <div className="">
