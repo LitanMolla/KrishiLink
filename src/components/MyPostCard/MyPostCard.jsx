@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 import SuccessToast from '../../utils/SuccessToast';
+import WarningToast from '../../utils/WarningToast';
 
 const MyPostCard = ({ post, setPosts }) => {
     const axiosPublic = useAxiosPublic()
@@ -26,7 +27,16 @@ const MyPostCard = ({ post, setPosts }) => {
             })
     };
     const handleDelete = () => {
-        
+        axiosPublic.delete(`/my-crops/${_id}`)
+        .then(data=>{
+            if (data.data.deletedCount) {
+                WarningToast('Post Deleted')
+                setPosts(prv=>prv.filter(item=>item._id !== _id))
+            }
+        })
+        .catch(error=>{
+            // console.log(error.message)
+        })
     }
     return (
         <>
@@ -43,7 +53,7 @@ const MyPostCard = ({ post, setPosts }) => {
                     <div className="text-xs text-gray-500">Created: {createdAt}</div>
                 </td>
                 <td className="py-3 px-4">{type}</td>
-                <td className="py-3 px-4 text-center">৳{pricePerUnit} / {unit}</td>
+                <td className="py-3 px-4 text-center capitalize">৳{pricePerUnit} / {unit}</td>
                 <td className="py-3 px-4 text-center">{quantity}</td>
                 <td className="py-3 px-4">{location}</td>
                 <td className="py-3 px-4 text-center">
