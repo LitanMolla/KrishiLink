@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 import SuccessToast from '../../utils/SuccessToast';
 import WarningToast from '../../utils/WarningToast';
+import Swal from 'sweetalert2';
 
 const MyPostCard = ({ post, setPosts }) => {
     const axiosPublic = useAxiosPublic()
@@ -27,17 +28,41 @@ const MyPostCard = ({ post, setPosts }) => {
             })
     };
     const handleDelete = () => {
-        axiosPublic.delete(`/my-crops/${_id}`)
-        .then(data=>{
-            if (data.data.deletedCount) {
-                WarningToast('Post Deleted')
-                setPosts(prv=>prv.filter(item=>item._id !== _id))
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Once deleted, you won't be able to recover this post!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#16a34a",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosPublic
+                    .delete(`/my-crops/${_id}`)
+                    .then((data) => {
+                        if (data.data.deletedCount) {
+                            WarningToast("Post Deleted");
+                            setPosts((prv) => prv.filter((item) => item._id !== _id));
+                            Swal.fire({
+                                icon: "success",
+                                title: "Deleted!",
+                                text: "Your post has been deleted successfully.",
+                                showConfirmButton: false,
+                                timer: 1500,
+                            });
+                        }
+                    })
+                    .catch((error) => {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Delete Failed",
+                            text: "Something went wrong. Please try again!",
+                        });
+                    });
             }
-        })
-        .catch(error=>{
-            // console.log(error.message)
-        })
-    }
+        });
+    };
     return (
         <>
             <tr className="hover:bg-gray-50">

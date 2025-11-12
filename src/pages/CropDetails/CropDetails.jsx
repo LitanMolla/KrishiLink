@@ -63,24 +63,36 @@ const CropDetails = () => {
   }
   const handleChangeStatus = (status, userEmail, quantity, cropId, i) => {
     const payload = { status, userEmail, quantity };
+
     axiosPublic.patch(`/interests/${cropId}`, payload)
       .then(res => {
-        if (res.data.modifiedCount) {
+        if (res.data.success) {
           if (status === 'accepted') SuccessToast('Interest Accepted');
           if (status === 'rejected') WarningToast('Interest Rejected');
-
-          setCrop(prev => ({
-            ...prev,
-            interests: (prev?.interests || []).map(item =>
+          setCrop(prev => {
+            if (!prev) return prev;
+            const newInterests = (prev.interests || []).map(item =>
               item.userEmail === userEmail && item.cropId === cropId
                 ? { ...item, status }
                 : item
-            )
-          }));
+            );
+            let newQuantity = prev.quantity;
+            if (status === 'accepted') {
+              const prevQty = Number(prev.quantity) || 0;
+              const dec = Number(quantity) || 0;
+              newQuantity = Math.max(0, prevQty - dec); // don't go negative
+            }
+            return {
+              ...prev,
+              interests: newInterests,
+              quantity: newQuantity
+            };
+          });
         }
       })
       .catch(err => console.log(err.message));
   };
+
 
   return (
     <>

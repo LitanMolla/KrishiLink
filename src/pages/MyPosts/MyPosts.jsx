@@ -19,7 +19,7 @@ const MyPosts = () => {
     <div>
       <section className="px-4 py-10">
         <div className="mx-auto w-full max-w-6xl rounded-xl bg-white ring-1 ring-gray-200 shadow-sm overflow-hidden">
-          <div className="flex flex-wrap items-center justify-between gap-3 px-6 py-5 border-b">
+          <div className="flex flex-wrap items-center justify-between gap-3 px-6 py-5 border-b border-b-gray-300">
             <div>
               <h2 className="text-xl font-semibold text-gray-900">My Posts</h2>
               <p className="text-sm text-gray-600">Manage your crop listings</p>
@@ -33,7 +33,7 @@ const MyPosts = () => {
                   <th className="py-3 px-4 text-left">Name</th>
                   <th className="py-3 px-4 text-left">Type</th>
                   <th className="py-3 px-4 text-center">Price/Unit</th>
-                  <th className="py-3 px-4 text-center">Qty</th>
+                  <th className="py-3 px-4 text-center">Quantity</th>
                   <th className="py-3 px-4 text-left">Location</th>
                   <th className="py-3 px-4 text-center">Actions</th>
                 </tr>
