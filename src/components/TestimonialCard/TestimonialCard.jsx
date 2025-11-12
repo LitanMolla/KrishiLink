@@ -2,7 +2,7 @@ import React from 'react'
 
 const TestimonialCard = ({ testimonial }) => {
     const { image, message, role, name } = testimonial || {}
-    console.log(testimonial)
+    // console.log(testimonial)
     return (
         <div className="bg-gray-100 border border-gray-100 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 p-6 flex flex-col items-center text-center group">
             <div className="w-20 h-20 rounded-full overflow-hidden mb-4 ring-2 ring-green-200 group-hover:ring-green-400 transition">

@@ -13,7 +13,9 @@ const MyPosts = () => {
       .then(data => {
         setPosts(data.data)
       })
-      .catch(error => console.log(error.message))
+      .catch(error => {
+        // console.log(error.message)
+      })
   }, [userEmail])
   return (
     <div>

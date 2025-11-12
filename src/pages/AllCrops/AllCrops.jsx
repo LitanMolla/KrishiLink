@@ -20,7 +20,7 @@ const AllCrops = () => {
         <div className="container">
           <div className="flex justify-between items-center mb-5 flex-col sm:flex-row gap-5">
             <div className="text-center sm:text-left">
-              <h2 className='text-3xl lg:text-4xl font-semibold text-green-600 mb-2'>All Crops</h2>
+              <h2 className="text-4xl font-bold text-green-600 mb-3">All <span className="text-gray-800">Crops</span></h2>
               <p className='text-gray-600'>Browse fresh crops from farmers across the country
               </p>
             </div>

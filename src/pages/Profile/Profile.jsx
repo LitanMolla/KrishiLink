@@ -28,7 +28,7 @@ const Profile = () => {
       <section className='my-10'>
         <div className="container">
           <div className="max-w-xl mx-auto bg-white p-10 rounded-lg shadow-sm duration-300 hover:shadow-lg border-l-2 border-l-green-600 w-full space-y-3 text-center border-b-2 border-b-green-600">
-            <h4 className='text-3xl font-semibold text-center'>Profile Information</h4>
+            <h2 className="text-4xl font-bold text-green-600 mb-3">Personal <span className="text-gray-800">Information</span></h2>
             <img className='h-40 w-40 object-cover mx-auto rounded-xl border border-gray-300' src={photo} alt={userName} />
             <h4 className='text-xl font-medium'>Name: {userName}</h4>
             <p>Email: {useremail}</p>

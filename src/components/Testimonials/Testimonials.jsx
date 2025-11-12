@@ -9,7 +9,7 @@ const Testimonials = () => {
         axiosPublic.get('/testimonials')
         .then(data=>setTestimonials(data.data))
         .catch(error=>{
-            console.log(error.message)
+            // console.log(error.message)
         })
     },[])
   return (

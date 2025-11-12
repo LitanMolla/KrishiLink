@@ -56,7 +56,7 @@ const CropDetails = () => {
             event.target.reset()
           })
           .catch(error => {
-            console.log(error.code)
+            // console.log(error.code)
           })
       }
     });

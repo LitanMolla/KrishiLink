@@ -43,7 +43,7 @@ const AddCrop = () => {
           <div className="w-full max-w-3xl mx-auto">
             <div className="rounded-xl bg-white ring-1 ring-gray-200 shadow-sm hover:shadow-xl transition-all overflow-hidden">
               <div className="px-8 pt-8 pb-4 text-center">
-                <h2 className="text-3xl font-heading font-semibold  inline-block text-green-600">Add New Crop</h2>
+                <h2 className="text-4xl font-bold text-green-600 mb-3">Add New <span className="text-gray-800">Crop</span></h2>
                 <p className="text-gray-500 mt-2">
                   List  agricultural item on the platform
                 </p>

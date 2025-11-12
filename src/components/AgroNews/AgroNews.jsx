@@ -12,7 +12,7 @@ const AgroNews = () => {
         axiosPublic.get('/news')
         .then(data=>setNewsData(data.data))
         .catch(error=>{
-            console.log(error.message)
+            // console.log(error.message)
         })
     },[])
   return (

@@ -14,14 +14,12 @@ const MyInterests = () => {
         setInterests(data.data)
       })
   }, [userEmail])
-  // console.log(interests)
-  // interests?.map(item => console.log(item))
   return (
     <>
       <section className='my-10'>
         <div className="container">
           <div className="container mx-auto my-10">
-            <h2 className="text-3xl font-semibold text-green-600 mb-5 text-center">My Interests</h2>
+            <h2 className="text-4xl font-bold text-green-600 mb-5 text-center">My <span className="text-gray-800">Interests</span></h2>
             <div className="overflow-x-auto rounded-xl border border-gray-200 shadow-sm bg-white max-w-3xl mx-auto">
               <table className="w-full text-sm">
 
