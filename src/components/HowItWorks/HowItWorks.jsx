@@ -14,7 +14,7 @@ const HowItWorks = () => {
     }, [])
     return (
         <section className="py-10 bg-white lg:py-20">
-            <div className="container px-6">
+            <div className="container">
                 <div className="text-center mb-12">
                     <h2 className="text-3xl lg:text-4xl font-bold text-green-600">How <span className="text-gray-800">KrishiLink</span> Works</h2>
                     <p className="text-gray-600 mt-3">Follow these simple steps to connect farmers and buyers efficiently.</p>
@@ -25,8 +25,7 @@ const HowItWorks = () => {
                     ))}
                 </div>
             </div>
-            <div className="absolute top-10 -left-20 w-60 h-60 bg-green-100/40 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-10 -right-20 w-60 h-60 bg-green-200/30 rounded-full blur-3xl"></div>
+            
         </section>
     );
 };
