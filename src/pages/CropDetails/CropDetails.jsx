@@ -61,6 +61,27 @@ const CropDetails = () => {
       }
     });
   }
+  const handleChangeStatus = (status, userEmail, quantity, cropId, i) => {
+    const payload = { status, userEmail, quantity };
+    axiosPublic.patch(`/interests/${cropId}`, payload)
+      .then(res => {
+        if (res.data.modifiedCount) {
+          if (status === 'accepted') SuccessToast('Interest Accepted');
+          if (status === 'rejected') WarningToast('Interest Rejected');
+
+          setCrop(prev => ({
+            ...prev,
+            interests: (prev?.interests || []).map(item =>
+              item.userEmail === userEmail && item.cropId === cropId
+                ? { ...item, status }
+                : item
+            )
+          }));
+        }
+      })
+      .catch(err => console.log(err.message));
+  };
+
   return (
     <>
       <section className='my-10'>
@@ -144,7 +165,7 @@ const CropDetails = () => {
             </form>
           )}
           {/* Interested Submit part end */}
-          {/* Received Interests (Owner Only, Static UI) */}
+          {/* Received Interests */}
           {matchEmail && (
             <div className="mt-8 max-w-5xl mx-auto">
               <h3 className="text-xl font-semibold text-primary mb-3">Received Interests</h3>
@@ -176,28 +197,17 @@ const CropDetails = () => {
                         return (
                           <tr key={index} className="border-t border-t-gray-300">
                             <td className="py-3 px-4">{i.userName}</td>
-                            <td className="py-3 px-4">{i.quantity} {crop?.unit}</td>
+                            <td className="py-3 px-4 capitalize">{i.quantity} {crop?.unit}</td>
                             <td className="py-3 px-4">{i.message || "-"}</td>
                             <td className="py-3 px-4">
-                              <span className={`px-2 py-1 rounded-full text-xs ${pill}`}>
+                              <span className={`px-2 py-1 rounded-full text-xs capitalize ${pill}`}>
                                 {i.status}
                               </span>
                             </td>
                             <td className="py-3 px-4 space-x-2">
-                              <button
-                                className="px-3 py-1 rounded-lg bg-green-500 text-white disabled:opacity-50 cursor-pointer"
-                                disabled={i.status !== "pending"}
-                                title="Accept"
-                              >
-                                Accept
-                              </button>
-                              <button
-                                className="px-3 py-1 rounded-lg bg-red-500 text-white disabled:opacity-50 cursor-pointer"
-                                disabled={i.status !== "pending"}
-                                title="Reject"
-                              >
-                                Reject
-                              </button>
+                              {i.status === 'pending' ? <><button onClick={() => handleChangeStatus('accepted', i.userEmail, i.quantity, i.cropId, i)} className="px-3 py-1 rounded-lg bg-green-500 text-white disabled:opacity-50 cursor-pointer"> Accept</button>
+                                <button onClick={() => handleChangeStatus('rejected', i.userEmail, i.quantity, i.cropId, i)} className="px-3 py-1 rounded-lg bg-red-500 text-white disabled:opacity-50 cursor-pointer" disabled={i.status !== "pending"} title="Reject">Reject</button></>
+                                : <span className='text-gray-500'>Actions Completed</span>}
                             </td>
                           </tr>
                         );
