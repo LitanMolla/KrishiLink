@@ -36,7 +36,7 @@ Users can list crops, send interest requests, manage posts, and track their inte
 - **Node.js + Express.js** (Backend)  
 - **MongoDB Atlas** (Database)  
 - **SweetAlert2 + Toast Notifications**  
-- **Vercel** (Frontend Hosting)
+- **Vercel**
 
 ---
 

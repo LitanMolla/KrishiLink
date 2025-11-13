@@ -22,14 +22,6 @@ const CropCard = ({ crop }) => {
             ৳{pricePerUnit}/{unit}
           </span>
         </div>
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="px-3 py-1 text-xs font-medium rounded-full bg-amber-50 text-amber-700 capitalize">
-            {quantity} {unit}
-          </span>
-          <span className="px-3 py-1 text-xs font-medium rounded-full bg-gray-50 text-gray-700">
-            {interests.length} interest{interests.length !== 1 && "s"}
-          </span>
-        </div>
         <Link to={`/corp-details/${_id}`} className="link rounded-md text-center">View Details</Link>
       </div>
     </div>

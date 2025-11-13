@@ -47,6 +47,16 @@ const AllCrops = () => {
               ))
             }
           </div>
+          {
+            crops.length === 0
+            &&
+            <div className="py-20 flex flex-col items-center justify-center text-center">
+              <h3 className="text-2xl font-semibold text-gray-800 mb-2">No crops found</h3>
+              <p className="text-gray-600">
+                Currently there are no crops to show.
+              </p>
+            </div>
+          }
           <h4></h4>
         </div>
       </section>
