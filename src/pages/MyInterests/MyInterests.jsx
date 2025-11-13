@@ -25,7 +25,7 @@ const MyInterests = () => {
     <>
       <section className='my-10'>
         <div className="container">
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center flex-col md:flex-row mb-5">
             <h2 className="text-4xl font-bold text-green-600 mb-5 text-center">My <span className="text-gray-800">Interests</span></h2>
             <select onChange={(e) => setSort(e.target.value)} className='border px-5 py-2.5 border-gray-300 rounded-md bg-white outline-green-300'>
               <option disabled selected>Sort by Quantity</option>
