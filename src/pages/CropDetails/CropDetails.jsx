@@ -122,7 +122,7 @@ const CropDetails = () => {
                     {location}
                   </span>
                 </div>
-                <div className="p-6 space-y-5">
+                <div className="p-6 space-y-3">
                   <div className="flex items-center justify-between">
                     <h4 className="text-2xl font-heading font-semibold">
                       {name}
@@ -145,9 +145,8 @@ const CropDetails = () => {
                       Available: {quantity} {unit}
                     </span>
                   </div>
-                  {/* <p className="text-gray-700 leading-relaxed text-sm text-center">
-              {description}
-            </p> */}
+                  <p className="text-gray-700 leading-relaxed text-sm text-center"><b>Owner:</b> {owner?.ownerName}</p>
+                  <p className="text-gray-700 leading-relaxed text-sm text-center"><b>Description:</b> {description}</p>
                 </div>
               </div>
               {/* Details Part End */}
