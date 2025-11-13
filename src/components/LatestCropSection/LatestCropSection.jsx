@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import useAxiosPublic from '../../hooks/useAxiosPublic'
 import CropCard from '../CropCard/CropCard';
 import Loader from '../Loader/Loader';
+import { Link } from 'react-router';
 const LatestCropSection = () => {
     const axiosPublic = useAxiosPublic();
     const [crops, setCrops] = useState([])
@@ -34,6 +35,9 @@ const LatestCropSection = () => {
                                 <CropCard key={item._id} crop={item} />
                             ))
                         }
+                    </div>
+                    <div className="text-center mt-10">
+                        <Link to='/all-crops' className='bg-green-500 duration-300 hover:bg-green-600 text-white px-5 py-2.5 rounded-md inline-block mx-auto'>View All Crops</Link>
                     </div>
                 </div>
             </section>
