@@ -2,7 +2,7 @@ const StepCard = ({step,idx}) => {
     const {icon,title,desc} = step || {}
     return (
         <div
-            className="relative  rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg hover:-translate-y-2 transition-all duration-300 p-6 flex flex-col items-center bg-gray-100">
+            className="relative  rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg hover:-translate-y-2 transition-all duration-300 p-6 flex flex-col items-center bg-gray-100 ">
             <div className="w-14 h-14 flex items-center justify-center text-3xl bg-green-100 text-green-600 rounded-full shadow-sm mb-4">{icon}</div>
             <span className="absolute -top-3 right-4 text-xs bg-green-600 text-white px-2 py-0.5 rounded-full font-medium shadow-sm">Step {idx + 1}</span>
             <h3 className="text-lg font-semibold text-gray-800 mb-2">{title}</h3>

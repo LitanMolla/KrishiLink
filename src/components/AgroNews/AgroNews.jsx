@@ -1,20 +1,23 @@
 import { useEffect, useState } from "react";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import NewsCard from "../NewsCard/NewsCard";
+import Loader from "../Loader/Loader";
 
 
 
 
 const AgroNews = () => {
-    const axiosPublic = useAxiosPublic()
-    const [newsData, setNewsData] = useState([])
-    useEffect(()=>{
-        axiosPublic.get('/news')
-        .then(data=>setNewsData(data.data))
-        .catch(error=>{
-            // console.log(error.message)
-        })
-    },[])
+  const axiosPublic = useAxiosPublic()
+  const [newsData, setNewsData] = useState([])
+  const [pending, setPending] = useState(false)
+  useEffect(() => {
+    axiosPublic.get('/news')
+      .then(data => setNewsData(data.data))
+      .catch(error => {
+        // console.log(error.message)
+      })
+      .finally(() => setPending(false))
+  }, [])
   return (
     <section className="py-10 lg:py-20">
       <div className="container">
@@ -30,9 +33,10 @@ const AgroNews = () => {
 
         {/* News Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {newsData?.map((post) => (
-            <NewsCard post={post} key={post._id} />
-          ))}
+          {pending ? <Loader /> :
+            newsData?.map((post) => (
+              <NewsCard post={post} key={post._id} />
+            ))}
         </div>
       </div>
     </section>

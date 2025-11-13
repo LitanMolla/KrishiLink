@@ -8,7 +8,7 @@ import useAuth from '../../hooks/useAuth'
 const Root = () => {
   const { loading } = useAuth()
   const navigation = useNavigation()
-  console.log(navigation.location)
+  // console.log(navigation.location)
   return (
     <>
       <div className="flex flex-col min-h-screen font-inter text-gray-900 bg-gray-100">

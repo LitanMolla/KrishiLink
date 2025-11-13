@@ -2,17 +2,22 @@ import React, { useEffect, useState } from 'react'
 import useAuth from '../../hooks/useAuth'
 import useAxiosPublic from '../../hooks/useAxiosPublic'
 import InterestTable from '../../components/InterestTable/InterestTable'
+import Loader from '../../components/Loader/Loader'
 
 const MyInterests = () => {
   const { user } = useAuth()
   const axiosPublic = useAxiosPublic()
   const [interests, setInterests] = useState([])
+  const [pending, setPending] = useState(false)
   const userEmail = user?.email;
   useEffect(() => {
+    setPending(true)
     axiosPublic.get(`/interests/${userEmail}`)
-      .then(data => {
-        setInterests(data.data)
+      .then(data => setInterests(data.data))
+      .catch(error => {
+        // console.log(error.message)
       })
+      .finally(() => setPending(false))
   }, [userEmail])
   return (
     <>
@@ -34,7 +39,7 @@ const MyInterests = () => {
                 </thead>
 
                 <tbody className="divide-y divide-gray-100">
-                  {interests?.map((item,i)=><InterestTable key={i} interest={item} />)}
+                  {pending ? <Loader /> : interests?.map((item, i) => <InterestTable key={i} interest={item} />)}
                 </tbody>
               </table>
             </div>

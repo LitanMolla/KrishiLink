@@ -1,16 +1,50 @@
-# React + Vite
+# 🌿 KrishiLink - Farmer’s Growth & Connection Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Live Site:**  
+👉 https://krishi-link-weld.vercel.app/
 
-Currently, two official plugins are available:
+KrishiLink is a modern agricultural marketplace that connects **farmers, buyers, and wholesalers** across Bangladesh.  
+Users can list crops, send interest requests, manage posts, and track their interactions — all in one place.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 🌾 **Add & Manage Crops**  
+  Users can create, edit, and delete posts with details like crop type, price, quantity, and location.
 
-## Expanding the ESLint configuration
+- 💬 **Buyer Interest System**  
+  Buyers can send interest requests with quantity and custom messages. Owners can accept or reject them instantly.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- 📉 **Auto Quantity Adjustment**  
+  When an owner accepts an interest request, the crop’s available quantity automatically decreases.
+
+- 🔐 **Private User Dashboard**  
+  Users can view **My Posts** and **My Interests** pages to manage all their activities securely.
+
+- 📰 **Agro News & Blog Section**  
+  Displays curated agriculture-related articles, trends, and tips for farmers and buyers.
+
+---
+
+## 🧩 Technologies Used
+
+- **React.js** (Frontend)  
+- **Tailwind CSS** (Responsive UI)  
+- **React Router** (Client-side Routing)  
+- **Firebase Authentication**  
+- **Node.js + Express.js** (Backend)  
+- **MongoDB Atlas** (Database)  
+- **SweetAlert2 + Toast Notifications**  
+- **Vercel** (Frontend Hosting)
+
+---
+
+## 🧠 Core Functionalities
+
+- Create, update, delete crop posts  
+- Send & manage buyer interest requests  
+- Owner can accept/reject interests  
+- Automatic crop quantity reduction  
+- Search crops by name  
+- Fully responsive mobile-friendly design  

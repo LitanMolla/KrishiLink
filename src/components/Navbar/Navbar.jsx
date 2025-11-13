@@ -73,7 +73,7 @@ const Navbar = () => {
         </div>
       </nav>
       {/* mobile menu */}
-      <ul className={`${isOpen ? 'top-14' : '-top-60'} fixed w-full bg-gray-100 py-5 lg:hidden duration-1000 z-10 shadow-xl`}>
+      <ul className={`${isOpen ? 'top-14' : '-top-60'} fixed z-20 w-full bg-gray-100 py-5 lg:hidden duration-1000 shadow-xl`}>
         <div className="container text-center space-y-1">
           {navMenu}
           <div className="flex justify-center mt-5">

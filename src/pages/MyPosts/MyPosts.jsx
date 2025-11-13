@@ -2,20 +2,22 @@ import React, { useEffect, useState } from 'react'
 import useAxiosPublic from '../../hooks/useAxiosPublic'
 import useAuth from '../../hooks/useAuth'
 import MyPostCard from '../../components/MyPostCard/MyPostCard'
+import Loader from '../../components/Loader/Loader'
 
 const MyPosts = () => {
   const { user } = useAuth()
   const axiosPublic = useAxiosPublic()
   const [posts, setPosts] = useState([])
+  const [pending, setPending] = useState(false)
   const userEmail = user?.email;
   useEffect(() => {
+    setPending(true)
     axiosPublic.get(`/my-crops?email=${userEmail}`)
-      .then(data => {
-        setPosts(data.data)
-      })
+      .then(data => setPosts(data.data))
       .catch(error => {
         // console.log(error.message)
       })
+      .finally(() => setPending(false))
   }, [userEmail])
   return (
     <div>
@@ -42,7 +44,7 @@ const MyPosts = () => {
               </thead>
 
               <tbody className="divide-y divide-gray-100">
-                {
+                {pending ? <Loader /> :
                   posts?.map(item => (
                     <MyPostCard key={item._id} setPosts={setPosts} post={item} />
                   ))

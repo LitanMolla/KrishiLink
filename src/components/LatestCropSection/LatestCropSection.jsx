@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import useAxiosPublic from '../../hooks/useAxiosPublic'
 import CropCard from '../CropCard/CropCard';
+import Loader from '../Loader/Loader';
 const LatestCropSection = () => {
     const axiosPublic = useAxiosPublic();
     const [crops, setCrops] = useState([])
+    const [pending, setPending] = useState(false)
     useEffect(() => {
+        setPending(true)
         axiosPublic.get('/latest')
             .then(data => setCrops(data.data))
+            .catch(error => {
+                // console.log(error.message)
+            })
+            .finally(() => setPending(false))
     }, [])
     // console.log(crops)
     return (
@@ -20,6 +27,7 @@ const LatestCropSection = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                         {
+                            pending ? <Loader/> :
                             crops
                             &&
                             crops.map(item => (

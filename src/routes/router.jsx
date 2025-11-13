@@ -11,12 +11,14 @@ import CropDetails from '../pages/CropDetails/CropDetails'
 import MyInterests from '../pages/MyInterests/MyInterests'
 import MyPosts from '../pages/MyPosts/MyPosts'
 import Profile from '../pages/Profile/Profile'
+import Loader from '../components/Loader/Loader'
 
 const router = createBrowserRouter([
     {
         path:'/',
         Component: Root,
         errorElement: <NotFound/>,
+        hydrateFallbackElement: <Loader/>,
         children:[
             {
                 index: true,
