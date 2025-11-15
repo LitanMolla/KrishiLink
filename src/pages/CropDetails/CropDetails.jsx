@@ -13,16 +13,16 @@ const CropDetails = () => {
   const { id } = useParams()
   const axiosPublic = useAxiosPublic()
   const [pending, setPending] = useState(false)
+  const [crop, setCrop] = useState({})
   useEffect(() => {
     setPending(true)
     axiosPublic.get(`/crops/${id}`)
-      .then(data => setCrop(data.data[0]))
+      .then(data => setCrop(data.data))
       .catch(error => {
         // console.log(error.message)
       })
       .finally(() => setPending(false))
   }, [id])
-  const [crop, setCrop] = useState({})
   const { _id, name, type, pricePerUnit, unit, quantity, description, location, image, createdAt, interests, owner } = crop;
   const ownerEmail = owner?.ownerEmail;
   const userEmail = user?.email;
