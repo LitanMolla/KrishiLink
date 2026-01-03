@@ -28,6 +28,10 @@ const AllCrops = () => {
   const handlePagination = (index) => {
     setCurrentPage(index)
   }
+  const handleSearch = (e) => {
+    setCurrentPage(0)
+    setSearch(e.target.value)
+  }
   return (
     <>
       <section className='my-10'>
@@ -39,7 +43,7 @@ const AllCrops = () => {
               </p>
             </div>
             <div className="max-w-md">
-              <input onChange={(e) => setSearch(e.target.value)} className='border border-green-500 px-5 py-2.5 rounded-md outline-green-600 w-full' type="search" placeholder='Search...' />
+              <input onChange={handleSearch} className='border border-green-500 px-5 py-2.5 rounded-md outline-green-600 w-full' type="search" placeholder='Search...' />
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
